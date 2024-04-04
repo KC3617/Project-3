@@ -5,12 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The World Today</title>
     <style>
-        body { margin: 0; }
+        body {
+          margin: 0; 
+          background-color: black;
+        }
+        
+        h1 {
+          padding-top: 10px;
+          padding-bottom: 0px;
+          color:white;
+          font-size: 40px;
+          font-family: Georgia, 'Times New Roman', Times, serif;
+          text-align: center;
+        }
+
+        h2 {
+          color: white;
+          text-align: center;
+        }
+
+        .globeViz {
+          padding: 0px;
+        }
     </style>
     <script src="//unpkg.com/globe.gl"></script>
 <!--  <script src="../../dist/globe.gl.js"></script>-->
+<h1>The World Today</h1>
 </head>
 <body>
+  
+  <div>
+    <h2>
+      How are you today?
+    </h2>
+
+  </div>
+  
     <div id="globeViz"></div>
 
   <script>
@@ -24,12 +54,15 @@
     }));
 
     Globe()
+      .width('500px')
       .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
       .pointsData(gData)
       .pointAltitude('size')
       .pointColor('color')
     (document.getElementById('globeViz'))
-
+    
+    .backgroundColor('#000000')
   </script>
+
 </body>
 </html>
