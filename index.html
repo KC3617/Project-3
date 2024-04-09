@@ -28,10 +28,16 @@
           padding: 0px;
         }
     </style>
+
+    <script src="//unpkg.com/topojson-client"></script>
+
     <script src="//unpkg.com/globe.gl"></script>
 <!--  <script src="../../dist/globe.gl.js"></script>-->
+
 <h1>The World Today</h1>
+
 </head>
+
 <body>
   
   <div>
@@ -43,26 +49,22 @@
   
     <div id="globeViz"></div>
 
-  <script>
-    // Gen random data
-    const N = 10000;
-    const gData = [...Array(N).keys()].map(() => ({
-      lat: (Math.random() - 0.5) * 180,
-      lng: (Math.random() - 0.5) * 360,
-      size: 0.005,
-      color: ['violet'][Math.round(Math.random() * 3)]
-    }));
-
-    Globe()
-      .width('500px')
-      .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
-      .pointsData(gData)
-      .pointAltitude('size')
-      .pointColor('color')
-    (document.getElementById('globeViz'))
-    
-    .backgroundColor('#000000')
-  </script>
-
+    <script type="module">
+      import * as THREE from '//unpkg.com/three/build/three.module.js';
+  
+      const world = Globe()
+        (document.getElementById('globeViz'))
+        .backgroundColor('rgba(0,0,0,0)')
+        .showGlobe(false)
+        .showAtmosphere(false);
+  
+      fetch('//unpkg.com/world-atlas/land-110m.json').then(res => res.json())
+        .then(landTopo => {
+          world
+            .polygonsData(topojson.feature(landTopo, landTopo.objects.land).features)
+            .polygonCapMaterial(new THREE.MeshLambertMaterial({ color: 'violet', side: THREE.DoubleSide }))
+            .polygonSideColor(() => 'rgba(127,0,255,0.05)');
+        });
+        </script>
 </body>
 </html>
