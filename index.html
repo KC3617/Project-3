@@ -1,74 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The World Today</title>
-    <style>
-        body {
-          margin: 0; 
-          background-color: black;
-        }
-        
-        h1 {
-          padding-top: 10px;
-          padding-bottom: 0px;
-          color:white;
-          font-size: 40px;
-          font-family: Georgia, 'Times New Roman', Times, serif;
-          text-align: center;
-        }
-
-        p {
-          color: white;
-          text-align: center;
-          font-size: 20px;
-        }
-
-        .globeViz {
-          padding: 0px;
-        }
-    </style>
-
-    <script src="//unpkg.com/topojson-client"></script>
-
-    <script src="//unpkg.com/globe.gl"></script>
-<!--  <script src="../../dist/globe.gl.js"></script>-->
-
-<h1>The World Today</h1>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
-
 <body>
   
-  <div>
-    <p>
-      How are you today?
-    </p>
-
-  </div>
-  
-    <div id="globeViz"></div>
-
-    <script type="module">
-      import * as THREE from '//unpkg.com/three/build/three.module.js';
-      
-      const world = Globe()
-        (document.getElementById('globeViz'))
-        .backgroundColor('rgba(0,0,0,0)')
-        .showGlobe(false)
-        .showAtmosphere(false); 
-        
-      
-  
-      fetch('//unpkg.com/world-atlas/land-110m.json').then(res => res.json())
-        .then(landTopo => {
-          world
-            .lineHoverPrecision(0)
-            .polygonsData(topojson.feature(landTopo, landTopo.objects.land).features)
-            .polygonCapMaterial(new THREE.MeshLambertMaterial({ color: 'DarkViolet', side: THREE.DoubleSide }))
-            .polygonSideColor(() => 'rgba(127,0,255,0.1)');
-        });
-        </script>
 </body>
 </html>
