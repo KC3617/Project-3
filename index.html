@@ -19,6 +19,13 @@
         type: Phaser.AUTO,
         width: 1280,
         height: 960,
+        physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 300 },
+            debug: false
+          }
+        },
         scene: {
             preload: preload,
             create: create,
@@ -31,12 +38,12 @@
     function preload ()
     {
         this.load.image('Background', 'assets/Background.png');
-        this.load.image('enemy1', 'assets/Red Car_R.png');
-        this.load.image('enemy2', 'assets/Blue Car_R.png');
-        this.load.image('enemy3', 'assets/Navy Car_L.png');
-        this.load.image('enemy4', 'assets/Grey Car_L.png');
-        this.load.image('goal', 'assets/Lemondae Stand.png');
-        this.load.image('player', 'assets/Player.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.image('Red Car', 'assets/Red Car_R.png');
+        this.load.image('Blue Car', 'assets/Blue Car_R.png');
+        this.load.image('Navy Car', 'assets/Navy Car_L.png');
+        this.load.image('Grey Car', 'assets/Grey Car_L.png');
+        this.load.image('Lemondae Stand', 'assets/Lemondae Stand.png');
+        this.load.spritesheet('Player', 'assets/Player.png',  { frameWidth: 32, frameHeight: 48 });
     }
 
     function create ()
