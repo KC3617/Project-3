@@ -22,7 +22,7 @@
         physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 1500 },
+            gravity: { y: 1800 },
             debug: false
           }
         },
@@ -39,18 +39,17 @@
     {
         this.load.image('Background', 'assets/Background.png');
         this.load.image('ground', 'assets/ground.png');
-        this.load.image('Red Car', 'assets/Red Car_R.png');
-        this.load.image('Blue Car', 'assets/Blue Car_R.png');
-        this.load.image('Navy Car', 'assets/Navy Car_L.png');
-        this.load.image('Grey Car', 'assets/Grey Car_L.png');
-        this.load.image('Lemondae Stand', 'assets/Lemondae Stand.png');
+        this.load.image('RedCar', 'assets/RedCar.png');
+        this.load.image('BlueCar', 'assets/BlueCar.png');
+        this.load.image('NavyCar', 'assets/NavyCar.png');
+        this.load.image('GreyCar', 'assets/GreyCar.png');
+        this.load.image('LemonadeStand', 'assets/LemonadeStand.png');
         this.load.spritesheet('Player', 'assets/Player.png',  { frameWidth: 140, frameHeight: 160 });
     }
 
     function create ()
     {
-        this.add.sprite(640, 480, 'Background');
-
+        this.add.image(640, 480, 'Background');
 
         ground = this.physics.add.staticGroup();
         ground.create(400, 920, 'ground').refreshBody();
@@ -60,10 +59,13 @@
         player.setBounce(0.05);
         player.setCollideWorldBounds(true);
 
+        LemonadeStand = this.physics.add.staticGroup();
+        LemonadeStand.create(640, 100, 'LemonadeStand').setScale(0.2).refreshBody();
+
         this.physics.add.collider(player, ground);
 
         cursors = this.input.keyboard.createCursorKeys();
-
+        
     }
 
     function update ()
