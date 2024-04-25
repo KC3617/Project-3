@@ -4,14 +4,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Frogger Game</title>
-  <style>
-    canvas {
-      width: 100%;
+  <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+  <style type="text/css">
+    body {
+        margin: 0;
     }
-  </style>
+    </style>
 </head>
 <body>
-    <script src="js/phaser.min.js"></script>
-    <script src="js/game.js"></script>
+  
+  <script type="text/javascript">
+
+    var config = {
+        type: Phaser.AUTO,
+        width: 800,
+        height: 600,
+        scene: {
+            preload: preload,
+            create: create,
+            update: update
+        }
+    };
+
+    var game = new Phaser.Game(config);
+
+    function preload ()
+    {
+    }
+
+    function create ()
+    {
+    }
+
+    function update ()
+    {
+    }
+
+</script>
+
 </body>
 </html>
