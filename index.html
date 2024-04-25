@@ -38,17 +38,27 @@
     function preload ()
     {
         this.load.image('Background', 'assets/Background.png');
+        this.load.image('ground', 'assets/ground.png');
         this.load.image('Red Car', 'assets/Red Car_R.png');
         this.load.image('Blue Car', 'assets/Blue Car_R.png');
         this.load.image('Navy Car', 'assets/Navy Car_L.png');
         this.load.image('Grey Car', 'assets/Grey Car_L.png');
         this.load.image('Lemondae Stand', 'assets/Lemondae Stand.png');
-        this.load.spritesheet('Player', 'assets/Player.png',  { frameWidth: 32, frameHeight: 48 });
+        this.load.spritesheet('Player', 'assets/Player.png',  { frameWidth: 140, frameHeight: 160 });
     }
 
     function create ()
     {
         this.add.image(640, 480, 'Background');
+        this.static1 = this.physics.add.staticImage(640, 940, 'ground');
+
+        player = this.physics.add.sprite(140, 160, 'Player');
+        player.setScale(.5);
+        player.setBounce(0.2);
+        player.setCollideWorldBounds(true);
+
+        this.physics.add.collider(player, ground);
+
     }
 
     function update ()
