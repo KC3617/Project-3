@@ -49,6 +49,7 @@
 
     function create ()
     {
+        
         this.add.image(640, 480, 'Background');
 
         ground = this.physics.add.staticGroup();
@@ -62,7 +63,17 @@
         LemonadeStand = this.physics.add.staticGroup();
         LemonadeStand.create(640, 100, 'LemonadeStand').setScale(0.2).refreshBody();
 
+        Cars = this.physics.add.group({
+            immovable: true,
+            allowGravity: false
+        });
+        Cars.create(800,600,'RedCar');
+        Cars.create(300,550,'BlueCar');
+        Cars.create(100,300,'NavyCar');
+        Cars.create(650,370,'GreyCar');
+
         this.physics.add.collider(player, ground);
+        this.physics.add.collider(player, Cars);
 
         cursors = this.input.keyboard.createCursorKeys();
         
@@ -70,6 +81,7 @@
 
     function update ()
     {
+
         if (cursors.left.isDown)
         {
             player.setVelocityX(-200);
@@ -90,6 +102,22 @@
         {
             player.setVelocityY(-300);
         }
+
+    }
+
+    function runningCars() {
+        
+        bomb.setCollideWorldBounds(false);
+        bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+    }
+
+    function hitBomb (player, bomb)
+    {
+        this.physics.pause();
+
+        player.setTint(0xff0000);
+
+        gameOver = true;
     }
 
 </script>
