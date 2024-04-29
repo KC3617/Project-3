@@ -67,6 +67,8 @@
         player.setBounce(0.05);
         player.setCollideWorldBounds(true);
 
+        cursors = this.input.keyboard.createCursorKeys();
+
         LemonadeStand = this.physics.add.staticGroup();
         LemonadeStand.create(640, 100, 'LemonadeStand').setScale(0.2).refreshBody();
 
@@ -88,21 +90,9 @@
         greyCar.body.setSize(250, 75);
 
         this.physics.add.collider(player, ground);
-        this.physics.add.collider(player, cars);
+        this.physics.add.collider(player, cars, hitCars, null, this);
 
-        cursors = this.input.keyboard.createCursorKeys();
         
-    }
-
-    function hitCars (player, cars)
-    {
-        this.physics.pause();
-
-        allowGravity: false
-
-        player.setTint(0xff0000);
-
-        gameOver = true;
     }
 
     function update ()
@@ -134,6 +124,15 @@
         
     }
 
+    }
+
+    function hitCars (player, car)
+    {
+        this.physics.pause();
+
+        player.setTint(0xff0000);
+
+        gameOver = true;
     }
 
 </script>
