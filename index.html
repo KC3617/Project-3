@@ -7,7 +7,7 @@
   <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
   <style type="text/css">
     body {
-        margin: 0;
+        padding-left: 300px;
     }
     </style>
 </head>
@@ -54,6 +54,10 @@
         this.load.spritesheet('Player', 'assets/Player.png',  { frameWidth: 140, frameHeight: 160 });
     }
 
+    function getRandomSpeed(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
     function create ()
     {
         
@@ -77,11 +81,11 @@
             allowGravity: false
         });
 
-        let redCar = cars.create(800, 600, 'RedCar');
-        redCar.body.setSize(270, 90);
-
         let blueCar = cars.create(300, 550, 'BlueCar');
         blueCar.body.setSize(290, 100);
+
+        let redCar = cars.create(800, 600, 'RedCar');
+        redCar.body.setSize(270, 90);
 
         let navyCar = cars.create(100, 300, 'NavyCar');
         navyCar.body.setSize(240, 75);
@@ -92,14 +96,23 @@
         this.physics.add.collider(player, ground);
         this.physics.add.collider(player, cars, hitCars, null, this);
 
-        
+        function moveCar(car, speed) {
+            car.setVelocityX(speed); // Set velocity along the X axis
+        }
+
+            // Call the function to make each car move with different speeds  
+            moveCar(blueCar, getRandomSpeed(400, 700));
+            moveCar(redCar, getRandomSpeed(600, 1200));  
+            moveCar(navyCar, getRandomSpeed(-1200, -400)); 
+            moveCar(greyCar, getRandomSpeed(-1000, -400));
+                
     }
 
     function update ()
     {
         if (gameOver)
         {
-            return;
+            location.reload();
         }
 
         if (cursors.left.isDown)
@@ -124,10 +137,25 @@
         
     }
 
+    cars.getChildren().forEach(function(car) {
+        if (car.x < -car.width) {
+            // Car has moved off-screen to the left, reset its position to the right edge of the screen
+            car.x = game.config.width;
+            // Set a new random speed for the car
+            car.setVelocityX(getRandomSpeed(-1200, -400)); // Adjust the speed range as needed
+        } else if (car.x > game.config.width) {
+            // Car has moved off-screen to the right, reset its position to the left edge of the screen
+            car.x = -car.width;
+            // Set a new random speed for the car
+            car.setVelocityX(getRandomSpeed(400, 1200)); // Adjust the speed range as needed
+        }
+    });
+
     }
 
     function hitCars (player, car)
     {
+        this.pausePhysics = true;
         this.physics.pause();
 
         player.setTint(0xff0000);
