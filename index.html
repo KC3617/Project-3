@@ -95,6 +95,7 @@
 
         this.physics.add.collider(player, ground);
         this.physics.add.collider(player, cars, hitCars, null, this);
+        this.physics.add.collider(player, LemonadeStand, hitGoal, null, this);
 
         function moveCar(car, speed) {
             car.setVelocityX(speed); // Set velocity along the X axis
@@ -159,6 +160,16 @@
         this.physics.pause();
 
         player.setTint(0xff0000);
+
+        gameOver = true;
+    }
+
+    function hitGoal (player, LemonadeStand)
+    {
+        this.pausePhysics = true;
+        this.physics.pause();
+
+        player.setTint(0xffd700);
 
         gameOver = true;
     }
